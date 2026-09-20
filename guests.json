@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Ana",
+    "room": 101,
+    "room_type": "single",
+    "checked_in": true
+  },
+  {
+    "name": "Carlos",
+    "room": 102,
+    "room_type": "double",
+    "checked_in": true
+  },
+  {
+    "name": "Laura",
+    "room": 103,
+    "room_type": "suite",
+    "checked_in": false
+  },
+  {
+    "name": "Miguel",
+    "room": 104,
+    "room_type": "double",
+    "checked_in": true
+  }
+]
