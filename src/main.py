@@ -1,8 +1,15 @@
-# Day 06 — FastAPI intro
+# Day 07 — FastAPI POST requests & Pydantic
 
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI()
+
+class Guest(BaseModel):
+    name: str
+    room: int
+    room_type: str
+    checked_in: bool = False
 
 @app.get("/")
 def health_check():
@@ -19,3 +26,7 @@ def get_rooms():
 @app.get("/rooms/{room_id}")
 def get_room(room_id: int):
     return {"number": room_id, "type": "single", "occupied": False}
+
+@app.post("/guests")
+def create_guest(guest: Guest):
+    return {"message": "Guest created", "guest": guest}
