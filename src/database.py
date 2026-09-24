@@ -1,4 +1,4 @@
-content = """from sqlalchemy import create_engine, Column, Integer, String, Boolean
+from sqlalchemy import create_engine, Column, Integer, String, Boolean
 from sqlalchemy.orm import declarative_base, sessionmaker
 
 DATABASE_URL = "sqlite:///./hotel.db"
@@ -17,6 +17,3 @@ class GuestDB(Base):
 
 def create_tables():
     Base.metadata.create_all(bind=engine)
-"""
-with open("database.py", "w") as f:
-    f.write(content)

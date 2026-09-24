@@ -1,9 +1,10 @@
-# Day 07 — FastAPI POST requests & Pydantic
-
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from pydantic import BaseModel
+from sqlalchemy.orm import Session
+from database import SessionLocal, GuestDB, create_tables
 
 app = FastAPI()
+create_tables()
 
 class Guest(BaseModel):
     name: str
@@ -11,22 +12,25 @@ class Guest(BaseModel):
     room_type: str
     checked_in: bool = False
 
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
 @app.get("/")
 def health_check():
     return {"status": "ok", "message": "Hotel API is running!"}
 
-@app.get("/rooms")
-def get_rooms():
-    return [
-        {"number": 101, "type": "single", "occupied": False},
-        {"number": 102, "type": "double", "occupied": True},
-        {"number": 103, "type": "suite", "occupied": False}
-    ]
-
-@app.get("/rooms/{room_id}")
-def get_room(room_id: int):
-    return {"number": room_id, "type": "single", "occupied": False}
+@app.get("/guests")
+def get_guests(db: Session = Depends(get_db)):
+    return db.query(GuestDB).all()
 
 @app.post("/guests")
-def create_guest(guest: Guest):
-    return {"message": "Guest created", "guest": guest}
+def create_guest(guest: Guest, db: Session = Depends(get_db)):
+    db_guest = GuestDB(**guest.model_dump())
+    db.add(db_guest)
+    db.commit()
+    db.refresh(db_guest)
+    return db_guest
