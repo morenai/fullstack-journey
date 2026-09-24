@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from database import SessionLocal, GuestDB, create_tables
@@ -34,3 +34,19 @@ def create_guest(guest: Guest, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_guest)
     return db_guest
+
+@app.get("/guests/{guest_id}")
+def get_guest(guest_id: int, db: Session = Depends(get_db)):
+    guest = db.query(GuestDB).filter(GuestDB.id == guest_id).first()
+    if not guest:
+        raise HTTPException(status_code=404, detail="Guest not found")
+    return guest
+
+@app.delete("/guests/{guest_id}")
+def delete_guest(guest_id: int, db: Session = Depends(get_db)):
+    guest = db.query(GuestDB).filter(GuestDB.id == guest_id).first()
+    if not guest:
+        raise HTTPException(status_code=404, detail="Guest not found")
+    db.delete(guest)
+    db.commit()
+    return {"message": f"Guest {guest_id} deleted"}
