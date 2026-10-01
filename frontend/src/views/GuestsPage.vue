@@ -53,6 +53,7 @@ onMounted(fetchGuests)
         <option value="single">Single</option>
         <option value="double">Double</option>
         <option value="suite">Suite</option>
+        <option value="deluxe">Deluxe</option>
       </select>
       <button @click="addGuest">Add Guest</button>
     </div>

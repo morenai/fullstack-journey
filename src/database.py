@@ -15,5 +15,14 @@ class GuestDB(Base):
     room_type = Column(String)
     checked_in = Column(Boolean, default=False)
 
+class ReservationDB(Base):
+    __tablename__ = "reservations"
+    id = Column(Integer, primary_key=True, index=True)
+    guest_id = Column(Integer)
+    check_in = Column(String)
+    check_out = Column(String)
+    room = Column(Integer)
+
 def create_tables():
     Base.metadata.create_all(bind=engine)
+

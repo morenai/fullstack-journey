@@ -15,7 +15,7 @@ nav {
   display: flex;
   gap: 16px;
   padding: 16px;
-  background: #9c9caa;
+  background: #1a1a2e;
 }
 
 nav a {
