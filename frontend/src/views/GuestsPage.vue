@@ -11,13 +11,13 @@ const newGuest = ref({
 })
 
 async function fetchGuests() {
-  const res = await fetch('http://127.0.0.1:8000/guests')
+  const res = await fetch('https://fullstack-journey-production.up.railway.app/guests')
   guests.value = await res.json()
   loading.value = false
 }
 
 async function addGuest() {
-  await fetch('http://127.0.0.1:8000/guests', {
+  await fetch('https://fullstack-journey-production.up.railway.app/guests', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -31,7 +31,7 @@ async function addGuest() {
 }
 
 async function deleteGuest(id) {
-  await fetch(`http://127.0.0.1:8000/guests/${id}`, {
+  await fetch(`https://fullstack-journey-production.up.railway.app/guests/${id}`, {
     method: 'DELETE'
   })
   await fetchGuests()
