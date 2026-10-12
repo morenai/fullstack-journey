@@ -3,12 +3,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
 import HomePage from './views/HomePage.vue'
 import GuestsPage from './views/GuestsPage.vue'
+import ReservationsPage from './views/ReservationsPage.vue'
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', component: HomePage },
-    { path: '/guests', component: GuestsPage }
+    { path: '/guests', component: GuestsPage },
+    { path: '/reservations', component: ReservationsPage }
   ]
 })
 
