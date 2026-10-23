@@ -32,29 +32,6 @@ def test_get_guest_not_found():
     assert res.status_code == 404
 
 def test_delete_guest():
-    # Register and login first
-    client.post("/auth/register", json={
-        "email": "test@hotel.com",
-        "password": "testpass123"
-     })
-    login_res = client.post("/auth/login", data={
-        "username": "test@hotel.com",
-        "password": "testpass123"
-    })
-    token = login_res.json()["access_token"]
-    headers = {"Authorization": f"Bearer {token}"}
-
-    # Create a guest
-    res = client.post("/guests", json={
-        "name": "Delete Me",
-        "room": 888,
-        "room_type": "single"
-    })
-    guest_id = res.json()["id"]
-
-    # Delete with token
-    def test_delete_guest():
-    # Register and login first
     client.post("/auth/register", json={
         "email": "test@hotel.com",
         "password": "testpass123"
@@ -66,7 +43,6 @@ def test_delete_guest():
     token = login_res.json()["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
 
-    # Create a guest
     res = client.post("/guests", json={
         "name": "Delete Me",
         "room": 888,
@@ -74,6 +50,5 @@ def test_delete_guest():
     })
     guest_id = res.json()["id"]
 
-    # Delete with token
     res = client.delete(f"/guests/{guest_id}", headers=headers)
     assert res.status_code == 200
