@@ -1,10 +1,9 @@
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
 from passlib.context import CryptContext
+from config import SECRET_KEY, ACCESS_TOKEN_EXPIRE_MINUTES
 
-SECRET_KEY = "hotel-secret-key-change-in-production"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
 
