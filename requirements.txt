@@ -5,3 +5,7 @@ pydantic
 httpx
 pytest
 anyio
+python-jose
+passlib
+bcrypt
+python-multipart
