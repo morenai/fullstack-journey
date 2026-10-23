@@ -6,6 +6,6 @@ httpx
 pytest
 anyio
 python-jose
-passlib
-bcrypt
+passlib[argon2]
+argon2-cffi
 python-multipart
